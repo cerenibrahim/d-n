@@ -1,73 +1,385 @@
- {
-    flex-direction: column;
-    gap: 30px;
+:root {
+    --gold: #C9A227;
+    --gold-dark: #A6821A;
+    --bg-color: #F8F6F0; /* Soft krem/fildişi tonu */
+    --gate-color: #EFEBE1; /* Kapaklar için hafif daha koyu lüks krem */
+    --text-dark: #3A352F;
+    --text-light: #6B655B;
+    
+    --font-primary: 'Cinzel', serif;
+    --font-secondary: 'Cormorant Garamond', serif;
+    --font-text: 'Montserrat', sans-serif;
 }
-.family-card {
-    text-align: center;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.family-card h3 {
-    font-family: var(--font-heading);
-    color: var(--gold);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-.family-card h4 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
-.family-card p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #555;
-}
-.family-card span {
-    font-weight: 500;
+
+body {
+    background-color: var(--bg-color);
     color: var(--text-dark);
+    font-family: var(--font-secondary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
-/* Notlar */
-.timeline {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 30px;
-}
-.timeline li {
-    margin-bottom: 15px;
-    position: relative;
-    padding-left: 20px;
-    border-left: 2px solid var(--gold);
-}
-.gold-text {
+/* --- Müzik Butonu --- */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--gold);
     color: var(--gold);
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-.address {
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 20px;
-}
-
-/* Harita */
-.map-container {
-    width: 100%;
-    max-width: 400px;
-    height: 250px;
-    background: #e0e0e0;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    z-index: 999;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
-.gold-btn {
-    display: inline-block;
-    padding: 12px 25px;
+.music-btn.playing {
     background: var(--gold);
-    color: var(--white);
-    text-decoration: none;
-    border-radius: 25px;
+    color: #fff;
+}
+
+/* --- ÇİFT KAPAKLI (GATEFOLD) TASARIMI --- */
+#gate-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gate {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: var(--gate-color);
+    transition: transform 1.8s cubic-bezier(0.65, 0, 0.1, 1);
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+}
+
+.left-gate {
+    left: 0;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.right-gate {
+    right: 0;
+    border-left: 1px solid rgba(255,255,255,0.5);
+    z-index: 1;
+}
+
+/* Kapanış Kabartmaları (Emboss Etkisi) */
+.emboss-pattern {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    width: 80%;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 0 1px rgba(0,0,0,0.1), inset 0 0 2px rgba(255,255,255,1);
+    border-radius: 10px;
+    opacity: 0.5;
+}
+.emboss-pattern.left { right: 20px; }
+.emboss-pattern.right { left: 20px; }
+
+/* Kapak Açılma Animasyonu Class'ları */
+.left-gate.open {
+    transform: translateX(-100%);
+}
+.right-gate.open {
+    transform: translateX(100%);
+}
+
+/* Kapak Üzerindeki İçerikler (İsim, Mühür, Tarih) */
+.gate-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gate-names {
+    font-family: var(--font-primary);
+    font-size: 2.2rem;
+    color: var(--gold-dark);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+}
+
+.gate-date {
+    font-family: var(--font-text);
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: 40px;
+    letter-spacing: 5px;
+}
+
+/* Altın Balmumu Mühür */
+.wax-seal {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #E6C25D, #C9A227, #8A6508);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.wax-seal span {
+    font-family: var(--font-primary);
+    color: #4A3500;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+}
+.wax-seal .heart {
+    font-size: 1rem;
+    color: #8C1C1C;
+}
+.wax-seal:hover {
+    transform: scale(1.05);
+}
+
+.click-text {
+    margin-top: 30px;
+    color: var(--text-light);
+    font-family: var(--font-text);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeInOut 2s infinite;
+}
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Ana İçerik Gizleme Sınıfı */
+.hidden {
+    display: none !important;
+}
+
+/* --- ANA İÇERİK TASARIMI (İç Kısım) --- */
+#main-content {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+#main-content.visible {
+    opacity: 1;
+}
+
+section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.hero-content { padding: 40px 0; }
+.pre-title {
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
     margin-bottom: 20px;
 }
-.qr-code {
+.main-names {
+    font-family: var(--font-primary);
+    font-size: 3.5rem;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+.ampersand {
+    font-family: var(--font-secondary);
+    font-size: 2.5rem;
+    color: var(--gold);
+    font-style: italic;
+}
+
+.date-minimal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+.divider {
+    width: 1px;
+    height: 25px;
+    background-color: var(--gold);
+    transform: rotate(15deg);
+}
+
+.invitation-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+.parents-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    border-top: 1px solid rgba(201, 162, 39, 0.3);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    padding: 30px 0;
+}
+.parent-names {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.detail-card {
+    background: #FFF;
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border: 1px solid #F0F0F0;
+}
+.venue {
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+.date-full {
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.address-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    text-decoration: none;
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+.gold-btn {
+    background-color: var(--gold);
+    color: #FFF;
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+}
+.gold-btn:hover {
+    background-color: var(--gold-dark);
+    transform: translateY(-2px);
+}
+.small-btn {
+    background-color: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    margin-top: 10px;
+}
+
+.notes-card {
+    text-align: left;
+    background: rgba(255,255,255,0.6);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 3px solid #D9A0A8;
+}
+.notes-title {
+    font-family: var(--font-primary);
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+.notes-text {
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.groom-house, .contact { margin-bottom: 20px; }
+.groom-house h4, .contact h4 {
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+.groom-house p, .contact p {
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.contact a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.footer {
+    padding: 40px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+.footer-names {
+    font-family: var(--font-primary);
+    color: var(--gold);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
