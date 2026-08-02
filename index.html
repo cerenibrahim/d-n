@@ -3,141 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ceren & İbrahim - Düğün Davetiyesi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Ceren & İbrahim - Davetiye</title>
+    <!-- Lüks ve zarif fontlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Arka Plan Müziği -->
+    <!-- Müzik (Shape of My Heart - 2CELLOS) -->
     <audio id="bg-music" loop>
-        <!-- assets klasörüne bir piyano müziği eklemelisin -->
-        <source src="assets/piano.mp3" type="audio/mpeg">
+        <!-- Lütfen mp3 dosyanızın adını "shape-of-my-heart.mp3" olarak assets klasörüne kaydedin -->
+        <source src="assets/shape-of-my-heart.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- Müzik Kontrol Butonu -->
     <button id="music-toggle" class="music-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
     </button>
 
-    <!-- AÇILIŞ VE ZARF EKRANI -->
-    <div id="opening-screen">
-        <div class="intro-names" id="intro-names">
-            CEREN <span>&</span> İBRAHİM
+    <!-- ÇİFT KAPAKLI (GATEFOLD) AÇILIŞ EKRANI -->
+    <div id="gate-wrapper">
+        <div class="gate left-gate" id="left-gate">
+            <!-- Sol kapak kabartma deseni efekti -->
+            <div class="emboss-pattern left"></div>
+        </div>
+        <div class="gate right-gate" id="right-gate">
+            <!-- Sağ kapak kabartma deseni efekti -->
+            <div class="emboss-pattern right"></div>
         </div>
         
-        <div class="envelope-container hidden" id="envelope-container">
-            <div class="envelope">
-                <div class="envelope-flap" id="flap"></div>
-                <div class="envelope-paper" id="paper">
-                    <h2>C & İ</h2>
-                    <p>Davetlisiniz</p>
-                </div>
-                <div class="envelope-front"></div>
-                <div class="wax-seal" id="seal">
-                    C ❤️ İ
-                </div>
+        <div class="gate-content" id="gate-content">
+            <h2 class="gate-names">Ceren & İbrahim</h2>
+            
+            <!-- Altın Balmumu Mühür -->
+            <div class="wax-seal" id="seal">
+                <span>C <span class="heart">❤️</span> İ</span>
             </div>
-            <button class="open-btn" id="open-btn">Davetiyeyi Aç</button>
+            
+            <p class="gate-date">08.08.2026</p>
+            <p class="click-text">Davetiyeyi Aç</p>
         </div>
     </div>
 
     <!-- ANA DAVETİYE İÇERİĞİ -->
     <main id="main-content" class="hidden">
         
-        <!-- Hero Section -->
         <section class="hero reveal">
-            <div class="glass-card">
-                <h1 class="names">CEREN <br>❤️<br> İBRAHİM</h1>
-                <div class="date-time">
-                    <p class="date">08 Ağustos 2026</p>
-                    <p class="day">Cumartesi</p>
-                    <p class="time">Saat 19.00</p>
+            <div class="hero-content">
+                <p class="pre-title">Düğünümüze davetlisiniz.</p>
+                <h1 class="main-names">Ceren <br><span class="ampersand">&</span><br> İbrahim</h1>
+                <div class="date-minimal">
+                    <span>08</span>
+                    <span class="divider"></span>
+                    <span>08</span>
+                    <span class="divider"></span>
+                    <span>26</span>
                 </div>
-                <p class="venue-name">VAV BAHÇE</p>
-            </div>
-        </section>
-
-        <!-- Geri Sayım -->
-        <section class="countdown-section reveal">
-            <h2>Büyük Güne Kalan</h2>
-            <div class="countdown" id="countdown">
-                <div class="time-box"><span id="days">00</span><p>Gün</p></div>
-                <div class="time-box"><span id="hours">00</span><p>Saat</p></div>
-                <div class="time-box"><span id="minutes">00</span><p>Dakika</p></div>
-                <div class="time-box"><span id="seconds">00</span><p>Saniye</p></div>
+                <p class="invitation-text">
+                    Bu özel günümüzde, mutluluğumuza <br>
+                    ortak olmanızdan onur duyarız.
+                </p>
             </div>
         </section>
 
         <!-- Aileler -->
-        <section class="families reveal">
-            <div class="family-card">
-                <h3>Gelin</h3>
-                <h4>CEREN GÜVEN</h4>
-                <p><span>Anne:</span> Dilek Aktaş</p>
-                <p><span>Baba:</span> Ali Naki Güven ∞</p>
-            </div>
-            <div class="family-card">
-                <h3>Damat</h3>
-                <h4>İBRAHİM TURAN</h4>
-                <p><span>Anne:</span> Ayşe Turan</p>
-                <p><span>Baba:</span> Davut Turan</p>
-            </div>
-        </section>
-
-        <!-- Program Detayları -->
-        <section class="details reveal">
-            <div class="glass-card">
-                <h3 class="gold-text">Önemli Notlar</h3>
-                <ul class="timeline">
-                    <li>
-                        <strong>15.00 - 17.00</strong>
-                        <p>Damat evinde yemek ikramı yapılacaktır.</p>
-                    </li>
-                    <li>
-                        <strong>17.00</strong>
-                        <p>Gelin alma merasimi gerçekleştirilecektir.</p>
-                    </li>
-                </ul>
-                <div class="address">
-                    <h4>Damat Evi</h4>
-                    <p>Vişnelik Mah. Öğretmenler Cad.<br>53/7<br>Odunpazarı / Eskişehir</p>
+        <section class="parents reveal">
+            <div class="parents-grid">
+                <div class="parent-box">
+                    <p class="parent-names">Dilek Aktaş<br>Ali Naki Güven ∞</p>
+                </div>
+                <div class="parent-box">
+                    <p class="parent-names">Ayşe - Davut<br>Turan</p>
                 </div>
             </div>
         </section>
 
-        <!-- Konum & Harita -->
-        <section class="location reveal">
-            <h2>Konum</h2>
-            <p class="venue-name">VAV BAHÇE</p>
-            <div class="map-container">
-                <!-- Buraya gerçek VAV Bahçe Google Maps iframe'i eklenebilir -->
-                <div class="map-placeholder">Harita Alanı</div>
+        <!-- Tarih ve Konum Detayı -->
+        <section class="event-details reveal">
+            <div class="detail-card">
+                <h2 class="venue">VAV BAHÇE</h2>
+                <p class="date-full">CUMARTESİ | 08/08/2026 | 19.00</p>
+                <p class="address-text">
+                    Aşağı Söğütönü, 1040. Sk.,<br>
+                    Tepebaşı / Eskişehir
+                </p>
+                
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Vav+Bahçe,+Aşağı+Söğütönü,+1040.+Sk.,+Tepebaşı/Eskişehir" target="_blank" class="btn gold-btn">
+                    Yol Tarifi Al
+                </a>
             </div>
-            <div class="location-buttons">
-                <a href="#" class="btn gold-btn">Google Maps ile Git</a>
-                <div class="qr-code">
-                    <p>QR Kodu Okutun</p>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VAV+Bahce" alt="Konum QR" loading="lazy">
+        </section>
+
+        <!-- Program Notları -->
+        <section class="notes reveal">
+            <div class="notes-card">
+                <h3 class="notes-title">Program Detayları</h3>
+                <p class="notes-text">
+                    Saat <strong>15.00-17.00</strong> arasında damat evinde yemek ikramı yapılacak, 
+                    ardından saat <strong>17.00</strong>'da gelin alma merasimi gerçekleştirilecektir.
+                </p>
+                
+                <div class="groom-house">
+                    <h4>Damat Evi Adres:</h4>
+                    <p>Vişnelik Mah. Öğretmenler Cad. 53/7<br>Odunpazarı / Eskişehir</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Vişnelik+Mah.+Öğretmenler+Cad.+53/7+Odunpazarı+Eskişehir" target="_blank" class="btn small-btn">Damat Evine Yol Tarifi Al</a>
+                </div>
+
+                <div class="contact">
+                    <h4>İletişim Numarası:</h4>
+                    <p><a href="tel:05325528722">0532 552 87 22</a></p>
                 </div>
             </div>
         </section>
 
-        <!-- Galeri -->
-        <section class="gallery-section reveal">
-            <h2>Fotoğraflarımız</h2>
-            <div class="gallery-slider">
-                <!-- assets klasörüne fotografları eklemelisin -->
-                <div class="gallery-item">Görüntü 1</div>
-                <div class="gallery-item">Görüntü 2</div>
-                <div class="gallery-item">Görüntü 3</div>
-            </div>
-        </section>
-
-        <!-- Kapanış -->
-        <section class="outro reveal">
-            <p>"Sizleri aramızda görmekten onur duyarız."</p>
-            <h2>Ceren ❤️ İbrahim</h2>
+        <section class="footer reveal">
+            <h2 class="footer-names">C & İ</h2>
+            <p>Sonsuzluğa...</p>
         </section>
 
     </main>
