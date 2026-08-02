@@ -1,14 +1,137 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ceren & İbrahim</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceren & İbrahim - Düğün Davetiyesi</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lüks görünüm için Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body style="font-family: Arial; text-align:center; margin-top:100px;">
-  <h1>🤍 Ceren & İbrahim 🤍</h1>
-  <h2>08.08.2026</h2>
-  <h3>Saat 19.00</h3>
-  <p>Vera Vav Bahçe</p>
+<body>
+
+    <!-- Müzik Kontrolü -->
+    <button id="music-toggle" class="music-btn">
+        <span id="music-icon">🎵</span>
+    </button>
+    <audio id="bg-music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Açılış ve Zarf Ekranı -->
+    <div id="opening-screen">
+        <div class="names-intro">
+            <h1>CEREN <br>&<br> İBRAHİM</h1>
+        </div>
+        
+        <div class="envelope-container" id="envelope-container">
+            <div class="envelope">
+                <div class="flap" id="flap"></div>
+                <div class="envelope-body"></div>
+                <div class="seal" id="seal">
+                    <span>C ❤️ İ</span>
+                </div>
+            </div>
+            <button id="open-btn" class="gold-btn">Davetiyeyi Aç</button>
+        </div>
+    </div>
+
+    <!-- Ana Davetiye İçeriği (Zarf açıldıktan sonra görünür) -->
+    <main id="main-content" class="hidden">
+        
+        <!-- Davetiye Başlık -->
+        <section class="hero reveal">
+            <h2>CEREN</h2>
+            <div class="heart">❤️</div>
+            <h2>İBRAHİM</h2>
+            <div class="date">08 Ağustos 2026 <br> Cumartesi <br> Saat 19.00</div>
+            <div class="venue">VAV BAHÇE</div>
+        </section>
+
+        <!-- Geri Sayım -->
+        <section class="countdown-section reveal">
+            <h3>Büyük Güne Kalan</h3>
+            <div class="countdown-timer">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Gün</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Saat</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Dakika</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Saniye</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aileler -->
+        <section class="families-section reveal">
+            <div class="family-block">
+                <h4>Gelin</h4>
+                <h3>CEREN GÜVEN</h3>
+                <p><strong>Anne:</strong> Dilek Aktaş</p>
+                <p><strong>Baba:</strong> Ali Naki Güven ∞</p>
+            </div>
+            <div class="divider"></div>
+            <div class="family-block">
+                <h4>Damat</h4>
+                <h3>İBRAHİM TURAN</h3>
+                <p><strong>Anne:</strong> Ayşe Turan</p>
+                <p><strong>Baba:</strong> Davut Turan</p>
+            </div>
+        </section>
+
+        <!-- Program Detayları -->
+        <section class="schedule-section reveal">
+            <div class="glass-card">
+                <h3>Program Detayları</h3>
+                <p><strong>15.00 - 17.00</strong><br>Damat evinde yemek ikramı</p>
+                <p><strong>17.00</strong><br>Gelin alma merasimi</p>
+                <div class="address-box">
+                    <h4>Damat Evi</h4>
+                    <p>Vişnelik Mah. Öğretmenler Cad.<br>53/7 Odunpazarı / Eskişehir</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Konum & Harita -->
+        <section class="location-section reveal">
+            <h3>Konum</h3>
+            <p class="venue-name">VAV BAHÇE</p>
+            <div class="map-actions">
+                <a href="https://maps.google.com/?q=Vav+Bahçe+Eskişehir" target="_blank" class="gold-btn map-btn">Google Maps'te Aç</a>
+            </div>
+        </section>
+
+        <!-- Fotoğraf Galerisi -->
+        <section class="gallery-section reveal">
+            <h3>Galeri</h3>
+            <div class="gallery-container">
+                <div class="gallery-track">
+                    <!-- Gerçek projede img src yollarını assets/foto1.jpg gibi güncelleyebilirsin -->
+                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 1</div></div>
+                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 2</div></div>
+                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 3</div></div>
+                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 4</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kapanış -->
+        <section class="footer-section reveal">
+            <p>"Sizleri aramızda görmekten onur duyarız."</p>
+            <h2>Ceren ❤️ İbrahim</h2>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
