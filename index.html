@@ -4,128 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceren & İbrahim - Düğün Davetiyesi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Lüks görünüm için Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Müzik Kontrolü -->
-    <button id="music-toggle" class="music-btn">
-        <span id="music-icon">🎵</span>
-    </button>
+    <!-- Arka Plan Müziği -->
     <audio id="bg-music" loop>
-        <source src="assets/music.mp3" type="audio/mpeg">
+        <!-- assets klasörüne bir piyano müziği eklemelisin -->
+        <source src="assets/piano.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Açılış ve Zarf Ekranı -->
+    <!-- Müzik Kontrol Butonu -->
+    <button id="music-toggle" class="music-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+    </button>
+
+    <!-- AÇILIŞ VE ZARF EKRANI -->
     <div id="opening-screen">
-        <div class="names-intro">
-            <h1>CEREN <br>&<br> İBRAHİM</h1>
+        <div class="intro-names" id="intro-names">
+            CEREN <span>&</span> İBRAHİM
         </div>
         
-        <div class="envelope-container" id="envelope-container">
+        <div class="envelope-container hidden" id="envelope-container">
             <div class="envelope">
-                <div class="flap" id="flap"></div>
-                <div class="envelope-body"></div>
-                <div class="seal" id="seal">
-                    <span>C ❤️ İ</span>
+                <div class="envelope-flap" id="flap"></div>
+                <div class="envelope-paper" id="paper">
+                    <h2>C & İ</h2>
+                    <p>Davetlisiniz</p>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="wax-seal" id="seal">
+                    C ❤️ İ
                 </div>
             </div>
-            <button id="open-btn" class="gold-btn">Davetiyeyi Aç</button>
+            <button class="open-btn" id="open-btn">Davetiyeyi Aç</button>
         </div>
     </div>
 
-    <!-- Ana Davetiye İçeriği (Zarf açıldıktan sonra görünür) -->
+    <!-- ANA DAVETİYE İÇERİĞİ -->
     <main id="main-content" class="hidden">
         
-        <!-- Davetiye Başlık -->
+        <!-- Hero Section -->
         <section class="hero reveal">
-            <h2>CEREN</h2>
-            <div class="heart">❤️</div>
-            <h2>İBRAHİM</h2>
-            <div class="date">08 Ağustos 2026 <br> Cumartesi <br> Saat 19.00</div>
-            <div class="venue">VAV BAHÇE</div>
+            <div class="glass-card">
+                <h1 class="names">CEREN <br>❤️<br> İBRAHİM</h1>
+                <div class="date-time">
+                    <p class="date">08 Ağustos 2026</p>
+                    <p class="day">Cumartesi</p>
+                    <p class="time">Saat 19.00</p>
+                </div>
+                <p class="venue-name">VAV BAHÇE</p>
+            </div>
         </section>
 
         <!-- Geri Sayım -->
         <section class="countdown-section reveal">
-            <h3>Büyük Güne Kalan</h3>
-            <div class="countdown-timer">
-                <div class="time-box">
-                    <span id="days">00</span>
-                    <p>Gün</p>
-                </div>
-                <div class="time-box">
-                    <span id="hours">00</span>
-                    <p>Saat</p>
-                </div>
-                <div class="time-box">
-                    <span id="minutes">00</span>
-                    <p>Dakika</p>
-                </div>
-                <div class="time-box">
-                    <span id="seconds">00</span>
-                    <p>Saniye</p>
-                </div>
+            <h2>Büyük Güne Kalan</h2>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><p>Gün</p></div>
+                <div class="time-box"><span id="hours">00</span><p>Saat</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>Dakika</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>Saniye</p></div>
             </div>
         </section>
 
         <!-- Aileler -->
-        <section class="families-section reveal">
-            <div class="family-block">
-                <h4>Gelin</h4>
-                <h3>CEREN GÜVEN</h3>
-                <p><strong>Anne:</strong> Dilek Aktaş</p>
-                <p><strong>Baba:</strong> Ali Naki Güven ∞</p>
+        <section class="families reveal">
+            <div class="family-card">
+                <h3>Gelin</h3>
+                <h4>CEREN GÜVEN</h4>
+                <p><span>Anne:</span> Dilek Aktaş</p>
+                <p><span>Baba:</span> Ali Naki Güven ∞</p>
             </div>
-            <div class="divider"></div>
-            <div class="family-block">
-                <h4>Damat</h4>
-                <h3>İBRAHİM TURAN</h3>
-                <p><strong>Anne:</strong> Ayşe Turan</p>
-                <p><strong>Baba:</strong> Davut Turan</p>
+            <div class="family-card">
+                <h3>Damat</h3>
+                <h4>İBRAHİM TURAN</h4>
+                <p><span>Anne:</span> Ayşe Turan</p>
+                <p><span>Baba:</span> Davut Turan</p>
             </div>
         </section>
 
         <!-- Program Detayları -->
-        <section class="schedule-section reveal">
+        <section class="details reveal">
             <div class="glass-card">
-                <h3>Program Detayları</h3>
-                <p><strong>15.00 - 17.00</strong><br>Damat evinde yemek ikramı</p>
-                <p><strong>17.00</strong><br>Gelin alma merasimi</p>
-                <div class="address-box">
+                <h3 class="gold-text">Önemli Notlar</h3>
+                <ul class="timeline">
+                    <li>
+                        <strong>15.00 - 17.00</strong>
+                        <p>Damat evinde yemek ikramı yapılacaktır.</p>
+                    </li>
+                    <li>
+                        <strong>17.00</strong>
+                        <p>Gelin alma merasimi gerçekleştirilecektir.</p>
+                    </li>
+                </ul>
+                <div class="address">
                     <h4>Damat Evi</h4>
-                    <p>Vişnelik Mah. Öğretmenler Cad.<br>53/7 Odunpazarı / Eskişehir</p>
+                    <p>Vişnelik Mah. Öğretmenler Cad.<br>53/7<br>Odunpazarı / Eskişehir</p>
                 </div>
             </div>
         </section>
 
         <!-- Konum & Harita -->
-        <section class="location-section reveal">
-            <h3>Konum</h3>
+        <section class="location reveal">
+            <h2>Konum</h2>
             <p class="venue-name">VAV BAHÇE</p>
-            <div class="map-actions">
-                <a href="https://maps.google.com/?q=Vav+Bahçe+Eskişehir" target="_blank" class="gold-btn map-btn">Google Maps'te Aç</a>
+            <div class="map-container">
+                <!-- Buraya gerçek VAV Bahçe Google Maps iframe'i eklenebilir -->
+                <div class="map-placeholder">Harita Alanı</div>
             </div>
-        </section>
-
-        <!-- Fotoğraf Galerisi -->
-        <section class="gallery-section reveal">
-            <h3>Galeri</h3>
-            <div class="gallery-container">
-                <div class="gallery-track">
-                    <!-- Gerçek projede img src yollarını assets/foto1.jpg gibi güncelleyebilirsin -->
-                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 1</div></div>
-                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 2</div></div>
-                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 3</div></div>
-                    <div class="gallery-item"><div class="placeholder-img">Fotoğraf 4</div></div>
+            <div class="location-buttons">
+                <a href="#" class="btn gold-btn">Google Maps ile Git</a>
+                <div class="qr-code">
+                    <p>QR Kodu Okutun</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VAV+Bahce" alt="Konum QR" loading="lazy">
                 </div>
             </div>
         </section>
 
+        <!-- Galeri -->
+        <section class="gallery-section reveal">
+            <h2>Fotoğraflarımız</h2>
+            <div class="gallery-slider">
+                <!-- assets klasörüne fotografları eklemelisin -->
+                <div class="gallery-item">Görüntü 1</div>
+                <div class="gallery-item">Görüntü 2</div>
+                <div class="gallery-item">Görüntü 3</div>
+            </div>
+        </section>
+
         <!-- Kapanış -->
-        <section class="footer-section reveal">
+        <section class="outro reveal">
             <p>"Sizleri aramızda görmekten onur duyarız."</p>
             <h2>Ceren ❤️ İbrahim</h2>
         </section>
