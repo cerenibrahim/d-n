@@ -1,22 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- Müzik Kontrolü ---
-    const musicBtn = document.getElementById('music-toggle');
     const bgMusic = document.getElementById('bg-music');
     let isPlaying = false;
 
-    musicBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicBtn.classList.remove('playing');
-        } else {
-            bgMusic.play().catch(e => console.log("Otomatik oynatma engellendi", e));
-            musicBtn.classList.add('playing');
-        }
-        isPlaying = !isPlaying;
-    });
-
-    // --- Gatefold (Çift Kapak) Animasyonu ---
+    // --- Kapak (Gatefold) Animasyonu ---
     const gateWrapper = document.getElementById('gate-wrapper');
     const leftGate = document.getElementById('left-gate');
     const rightGate = document.getElementById('right-gate');
@@ -25,40 +12,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
 
     const openGates = () => {
-        // 1. Müzik Başlat
+        // Müzik Başlat
         if(!isPlaying) {
-            bgMusic.play().catch(e => console.log(e));
+            bgMusic.play().catch(e => console.log("Otomatik oynatma kısıtlaması", e));
             isPlaying = true;
-            musicBtn.classList.add('playing');
         }
 
-        // 2. Kapak üzerindeki isimler, mühür ve tarihi gizle (Fade out ve hafif büyüme efekti)
-        gateContent.style.transform = 'scale(1.1)';
+        // Yazılar yumuşakça kaybolur
         gateContent.style.opacity = '0';
 
         setTimeout(() => {
-            // 3. Kapakları Sağa ve Sola Kaydırarak Aç
+            // Kapaklar sağa ve sola kayar
             leftGate.classList.add('open');
             rightGate.classList.add('open');
             
             setTimeout(() => {
-                // 4. Kapak wrapper'ını gizle ve ana içeriği göster
                 gateWrapper.style.display = 'none';
                 mainContent.classList.remove('hidden');
                 
-                // Ana içerik Fade-in
+                // Ana içerik yavaşça belirir (Fade-in)
                 setTimeout(() => {
                     mainContent.classList.add('visible');
-                    revealElements(); // Scroll animasyonlarını tetikle
-                }, 50);
+                    revealElements();
+                }, 100);
                 
-            }, 1800); // Kapakların açılma süresini bekle
-        }, 400); // Ortadaki mühür ve yazıların kaybolmasını bekle
+            }, 1800); // Kapakların açılma süresi
+        }, 500); // Yazıların kaybolma süresi
     };
 
     seal.addEventListener('click', openGates);
 
-    // --- Scroll Reveal (Aşağı Kaydırdıkça Çıkan Elemanlar) ---
+    // --- Aşağı Kaydırdıkça Çıkan Elemanlar (Scroll Reveal) ---
     const revealElements = () => {
         const reveals = document.querySelectorAll('.reveal');
         
@@ -68,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         reveals.forEach(reveal => {
             observer.observe(reveal);
